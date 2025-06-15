@@ -1,0 +1,50 @@
+<div class="card shadow-sm post">
+  <div class="card-body">
+    <!-- Autor y fecha del post -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <strong class="text-primary">
+        <i class="bi bi-person-circle"></i> <%= post.author %>
+      </strong>
+      <small class="text-muted">
+        <i class="bi bi-clock"></i> <%= post.createdAt.toLocaleString() %>
+      </small>
+    </div>
+
+    <!-- Contenido del post -->
+    <p class="card-text"><%= post.content %></p>
+
+    <!-- Botón de Like y contador de Likes -->
+    <div class="d-flex align-items-center mb-3">
+      <button
+        class="btn btn-outline-danger btn-sm border-0 like-button"
+        data-id="<%= post.uuid %>"
+        data-liked="<%= post.isLiked %>"
+      >
+        <i class="bi <%= post.isLiked ? 'bi-heart-fill' : 'bi-heart' %>"></i>
+      </button>
+      <span class="ms-2 text-muted likes-count">
+        <%= post.likes.length %> <%= post.likes.length === 1 ? "like" : "likes" %>
+      </span>
+    </div>
+
+    <!-- Sección de Comentarios -->
+    <div>
+      <div class="mb-2 comment-count">
+        <i class="bi bi-chat-left-text"></i> Comments (0)
+      </div>
+
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control comment-input"
+          placeholder="Write a comment..."
+        />
+        <button class="btn btn-primary add-comment">
+          <i class="bi bi-send"></i> Add
+        </button>
+      </div>
+
+      <div class="comments"></div>
+    </div>
+  </div>
+</div>

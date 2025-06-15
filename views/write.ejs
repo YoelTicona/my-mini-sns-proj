@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Write - Mini SNS</title>
+    <link rel="stylesheet" href="css/write.css" />
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <%- include("header") %>
+    <h1 id="header">✍ Write a New Post</h1>
+    <main>
+      <form action="/write" method="post">
+
+        <label for="content">Your Post:</label><br />
+        <textarea 
+          id="content"
+          name="content"
+          rows="4"
+          cols="50"
+          required
+          ></textarea>
+        <br /><br />
+        <button type="submit">Post</button>
+      </form>
+      <br />
+      <%- include("footer") %>
+    </main>
+  </body>
+</html>

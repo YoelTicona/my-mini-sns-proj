@@ -1,0 +1,120 @@
+.login-container {
+  width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #E7D4B5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  color:#25313d;
+  font-weight: bold;
+  
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+
+}
+
+input:focus {
+  border-color: #2c3e50;
+  outline: none;
+}
+
+button {
+  display: block;
+  padding: 10px 20px;
+  background-color: #B6C7AA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: auto;
+}
+
+button:hover {
+  
+  background-color: #737f6b;
+}
+
+img {
+  display: block;
+  margin: 0 auto 20px;
+  height: auto;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+}
+span {
+  display: block;
+  margin-top: 10px;
+  color: #555;
+  font-size: 20px;
+  text-align: center;
+}
+#errorMensaje {
+  display: block;
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  height: auto;
+}
+
+.option {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+.option a {
+  padding: 10px;
+  color: #25313d;
+  background-color: #B6C7AA;
+  border: 1px solid #5c6456;
+  border-radius: 3px;
+}
+
+.option a:hover {
+  background-color: #717b6a;
+  text-decoration: none;
+  color: white;
+}
+
+.Name {
+  font-size: 24px;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 100px;
+  margin: 0;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.register{
+  padding: 10px;
+  margin: 0;
+  display: block;
+  width: 70px;
+  padding-top: 10px;
+  color: #ffffff;
+  border: 1px solid #dade70;
+  border-radius: 3px;
+  background: #e1ec00;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0 auto;
+}
+
+.register:hover {
+  background: #dade70;
+  text-decoration: none;
+}

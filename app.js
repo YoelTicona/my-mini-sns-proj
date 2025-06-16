@@ -12,11 +12,12 @@ const app = express(); // Create an instance of express
 const mongoose = require("mongoose"); // Import mongoose for MongoDB connection
 const Feed = require("./model/feed"); // Import the feed model
 
+
 // * ===== Archivos estaticos  ===== * //
 app.use("/css", express.static(path.join(__dirname, "public", "css"))); // Serve static CSS files
 app.use("/js", express.static(path.join(__dirname, "public", "js")));
 app.use("/image", express.static(path.join(__dirname, "public", "image")));
-
+app.use(express.json()); // Necesario para leer req.body en JSON (como los fetch)
 // * ===== Conexión a MongoDB ===== * //
 // Connect to MongoDB (only once when the server starts)
 mongoose
@@ -268,6 +269,27 @@ app.post("/friends/add", async (req, res) => {
   }
 });
 
+// agregar comentarios
+app.post("/posts/:uuid/comment", async (req, res) => {
+  const { uuid } = req.params;
+  const { content } = req.body;
+  const username = req.session.username;
+
+  if (!username) return res.status(401).send("Unauthorized");
+
+  try {
+    const post = await Feed.findOne({ uuid });
+    if (!post) return res.status(404).send("Post not found");
+
+    post.comments.push({ username, content });
+    await post.save();
+
+    res.json({ message: "Comment added", comment: { username, content } });
+  } catch (err) {
+    console.error("Error adding comment:", err);
+    res.status(500).send("Server error");
+  }
+});
 
 
 // * ===== Escuchando en el puerto 3000 ===== * //
@@ -283,10 +305,3 @@ app.listen(3000, () => {
 // * --------- Uso de EJS en Express --------- * //
 app.set("view engine", "ejs"); // EJS setup
 app.set("views", path.join(__dirname, "views")); // Set the views directory
-
-// const response = await fetch(`/posts/${postUuid}/like`, {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });

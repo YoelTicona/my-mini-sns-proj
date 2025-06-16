@@ -15,11 +15,19 @@ const feedSchema = new mongoose.Schema(
       type: String,
       required: true, // Author name (required)
     },
+    
     createdAt: {
       type: Date,
       default: Date.now, // Automatically set to current time
     },
     likes: [{type: String}], // Array of usernames who liked the feed
+    comments: [
+      {
+        username: { type: String, required: true },
+        content: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   (this.collection = "feed")
 ); // Explicitly specify the collection name module.exports = mongoose.model("Feed", feedSchema);

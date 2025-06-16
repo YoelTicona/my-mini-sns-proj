@@ -23,7 +23,8 @@
         <i class="bi <%= post.isLiked ? 'bi-heart-fill' : 'bi-heart' %>"></i>
       </button>
       <span class="ms-2 text-muted likes-count">
-        <%= post.likes.length %> <%= post.likes.length === 1 ? "like" : "likes" %>
+        <%= post.likes.length %> <%= post.likes.length === 1 ? "like" : "likes"
+        %>
       </span>
     </div>
 
@@ -44,7 +45,11 @@
         </button>
       </div>
 
-      <div class="comments"></div>
+      <div class="comments">
+        <% post.comments.forEach(function(comment) { %>
+        <p><%= comment.username %>: <%= comment.content %></p>
+        <% }) %>
+      </div>
     </div>
   </div>
 </div>

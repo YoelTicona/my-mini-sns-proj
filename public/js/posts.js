@@ -12,26 +12,46 @@ document.querySelectorAll(".post").forEach((post) => {
   }
 
   // Evento para agregar un comentario
-  addButton.addEventListener("click", () => {
+  addButton.addEventListener("click", async () => {
     const commentText = input.value.trim();
-    if (commentText) {
-      const comment = document.createElement("p");
-      comment.innerText = commentText;
+    const postUuid = post.querySelector(".like-button").dataset.id;
 
-      const deleteBtn = document.createElement("button");
-      deleteBtn.innerText = "Delete";
-      deleteBtn.style.marginLeft = "10px";
-      deleteBtn.addEventListener("click", () => {
-        comment.remove();
-        updateCommentCount(); // Actualizar contador al borrar
+    if (commentText) {
+    try {
+      const response = await fetch(`/posts/${postUuid}/comment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: commentText }),
       });
 
-      comment.appendChild(deleteBtn);
-      commentList.appendChild(comment);
-      updateCommentCount();
-      input.value = "";
+      if (response.ok) {
+        const data = await response.json();
+
+        const comment = document.createElement("p");
+        comment.innerText = `${data.comment.username}: ${data.comment.content}`;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.style.marginLeft = "10px";
+        deleteBtn.addEventListener("click", () => {
+          comment.remove();
+          updateCommentCount();
+        });
+
+        comment.appendChild(deleteBtn);
+        commentList.appendChild(comment);
+        updateCommentCount();
+        input.value = "";
+      } else {
+        console.error("Failed to save comment");
+      }
+    } catch (err) {
+      console.error("Error adding comment:", err);
     }
-  });
+  }
+});
 
   // Evento para el botón like
   const likeButton = post.querySelector(".like-button");

@@ -2,8 +2,8 @@ form {
   width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #B6C7AA;
-  border: 2px solid #000000;
+  background-color: #88aee3;
+  border: 2px solid #a2b7fe;
   border-radius: 5px;
 }
 input,
@@ -18,7 +18,7 @@ textarea {
 }
 button {
   padding: 10px 20px;
-  background-color: #8ca17c;
+  background-color: #93c0ff;
   color: white;
   border: none;
   border-radius: 3px;
@@ -26,5 +26,5 @@ button {
   transition: background-color 0.3s;
 }
 button:hover {
-  background-color: #6e7f63;
+  background-color: #549eff;
 }

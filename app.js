@@ -6,6 +6,8 @@ const path = require("path");
 const chalk = require("chalk");
 const User = require("./model/user");
 const bcrypt = require("bcrypt");
+const PORT = 3000 || process.env.PORT || 3000; // Port for the server
+const IP = "192.168.1.210";
 
 // * ===== Instancias ===== * //
 const app = express(); // Create an instance of express
@@ -21,7 +23,7 @@ app.use(express.json()); // Necesario para leer req.body en JSON (como los fetch
 // * ===== Conexión a MongoDB ===== * //
 // Connect to MongoDB (only once when the server starts)
 mongoose
-  .connect("mongodb://localhost:27017/my_first_db")
+  .connect("mongodb://localhost:27017/my_first_db" || process.env.MONGO_URI)
   .then(() =>
     console.log(chalk.bgHex("#b2ebf2").black.bold(" 🌤️  MongoDB Connected 🌤️ "))
   )
@@ -293,13 +295,17 @@ app.post("/posts/:uuid/comment", async (req, res) => {
 
 
 // * ===== Escuchando en el puerto 3000 ===== * //
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(chalk.bgHex("#ff223").bold(" 😀 USO DE EXPRESS 🎉"));
   console.log(
     chalk.green("Server Posts is Running on: ") +
-      chalk.cyan("http://localhost:3000")
+      chalk.cyan(`http://localhost:${PORT}`)
   );
-  console.log(chalk.gray("Press Ctrl + C to stop the server"));
+  console.log(
+    chalk.green("Server Posts is Running on IP: ") +
+      chalk.cyan(`http://${IP}:${PORT}`)
+    )
+  console.log(chalk.gray("Press Ctrl + C to stop the server"));  
 });
 
 // * --------- Uso de EJS en Express --------- * //
